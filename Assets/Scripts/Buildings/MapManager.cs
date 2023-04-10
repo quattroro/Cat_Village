@@ -50,7 +50,7 @@ public class MapManager : Singleton<MapManager>
     
 
 
-    [SerializeField]
+    //[SerializeField]
     private bool buildMode;
     public bool BuildMode
     {

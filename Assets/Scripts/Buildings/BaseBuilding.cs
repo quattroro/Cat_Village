@@ -4,28 +4,20 @@ using UnityEngine;
 
 public class BaseBuilding : MonoBehaviour
 {
-    public enum BUILDINGTYPE { NORMAL, BUILDINGTYPEMAX}
-
-    public class BuildingInfo
-    {
-        public string BuildingName;
-        public int BuildingObjNum;
-        public int BuildingType;
-                
-
-    
-
-    }
+    public enum BUILDINGTYPE { NORMAL, ROAD,SPECIAL, BUILDINGTYPEMAX}
 
 
+    /// 빌딩 정보
+    public BuildingInfo buildingInfo;
 
-    public Transform SnapPoint;
-    public float BuildNodeSize;
+
+    //자동 초기화
+    private Transform SnapPoint;
     private BoxCollider boxCollider;
 
     
 
-    [SerializeField]
+    //[SerializeField]
     private bool isBluePrintMode;
 
     public bool IsBluePrintMode
@@ -40,10 +32,6 @@ public class BaseBuilding : MonoBehaviour
         }
     }
 
-
-    public GameObject tempcube;
-    public GameObject tempcube2;
-
     private void Start()
     {
         VirtualStart();
@@ -54,6 +42,19 @@ public class BaseBuilding : MonoBehaviour
         InitSetting();
     }
 
+    public void Update()
+    {
+        VirtualUpdate();
+    }
+
+    public virtual void VirtualUpdate()
+    {
+        if (IsBluePrintMode)
+        {
+            Snap();
+        }
+    }
+
 
     public void InitSetting()
     {
@@ -61,11 +62,12 @@ public class BaseBuilding : MonoBehaviour
         SnapPoint = new GameObject("SnapPoint").transform;
         
         SnapPoint.parent = this.transform;
-        SnapPoint.localPosition = new Vector3((boxCollider.size.x/2)+boxCollider.center.x, (boxCollider.size.y / 2)+boxCollider.center.y, 0);
-
+        SnapPoint.localPosition = new Vector3(-((boxCollider.size.x / 2) - boxCollider.center.x), -((boxCollider.size.y / 2) - boxCollider.center.y), -((boxCollider.size.z / 2) - boxCollider.center.z));
 
     }
 
+    public GameObject temp1l;
+    public GameObject temp2;
 
     public void Snap()
     {
@@ -80,19 +82,15 @@ public class BaseBuilding : MonoBehaviour
 
         if (hit.collider!=null)
         {
-            //현재 마우스의 위치에서 가상의 스냅피봇의 위치 = 현재 마우스의 위치 + 스냅피봇의 로컬위치
-            //Vector3 tempSnapPoint = worldMousePos + new Vector3(SnapPoint.localPosition.x, worldMousePos.y, SnapPoint.localPosition.z);
-
+            //현재 마우스의 위치를 기준으로 잡은 가상의 스냅피봇의 위치 = 현재 마우스의 위치 + 스냅피봇의 로컬위치
             Vector3 tempSnapPoint = worldMousePos + (SnapPoint.position - this.transform.position);
-            tempcube.transform.position = tempSnapPoint;
+            temp1l.transform.position = tempSnapPoint;
 
             //해당 위치를 기준으로 왼쪽에 있는 월드 스냅피봇의 위치를 구한다.
             Vector3 worldSnapPoint = new Vector3((int)tempSnapPoint.x / (int)MapManager.Instance.GridSize, tempSnapPoint.y, (int)tempSnapPoint.z / (int)MapManager.Instance.GridSize);
-            tempcube2.transform.position = worldSnapPoint;
+            temp2.transform.position = worldSnapPoint;
 
             //Grid의 시작점정보를 받아와서 스냅을 구현해준다.
-
-
             Vector3 tempvec = worldSnapPoint - tempSnapPoint;
 
             if (tempvec.sqrMagnitude < 0.5)
@@ -105,17 +103,8 @@ public class BaseBuilding : MonoBehaviour
             }
         }
 
-        
-
     }
 
-    public void Update()
-    {
-        if (IsBluePrintMode)
-        {
-            Snap();
-        }
-            
-    }
+    
 
 }
