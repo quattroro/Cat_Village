@@ -17,6 +17,8 @@ public class MapManager : Singleton<MapManager>
     public int GridColCount;
     public int GridRowCount;
     public float GridWidth;
+    public LayerMask GridLayerMask;
+
 
     public LineRenderer lineRenderer;
 
@@ -30,6 +32,9 @@ public class MapManager : Singleton<MapManager>
         public Vector2 Index;
         public GameObject SettedBuild;
         public float TileSize;
+        
+
+
     }
 
 
@@ -45,7 +50,7 @@ public class MapManager : Singleton<MapManager>
     
 
 
-
+    [SerializeField]
     private bool buildMode;
     public bool BuildMode
     {
@@ -61,10 +66,14 @@ public class MapManager : Singleton<MapManager>
             if(value)
             {
                 ActiveBuildMode();
+                if (CurBuilding != null)
+                    CurBuilding.IsBluePrintMode = true;
             }
             else
             {
                 InActiveBuildMode();
+                if (CurBuilding != null)
+                    CurBuilding.IsBluePrintMode = false;
             }
         }
     }
@@ -72,7 +81,7 @@ public class MapManager : Singleton<MapManager>
     
     public void InitSetting()
     {
-
+        //그리드의 한칸이 건물이 들어갈 한 칸이다.
 
 
 
@@ -165,11 +174,11 @@ public class MapManager : Singleton<MapManager>
             BuildMode = !BuildMode;
         }
 
-        if(BuildMode)
-        {
-            if(CurBuilding!=null)
-                BuildingBuild(CurBuilding);
-        }
+        //if(BuildMode)
+        //{
+        //    if(CurBuilding!=null)
+        //        BuildingBuild(CurBuilding);
+        //}
 
     }
 
