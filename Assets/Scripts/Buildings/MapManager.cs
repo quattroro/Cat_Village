@@ -29,6 +29,7 @@ public class MapManager : Singleton<MapManager>
     //나중에 분리될것
     public class MapTile
     {
+        public int StageNum;
         public Vector2 Index;
         public GameObject SettedBuild;
         public float TileSize;
@@ -41,6 +42,9 @@ public class MapManager : Singleton<MapManager>
 
     [Header("MapInfo")]
     public List<List<MapTile>> MapInfo;
+
+
+
 
 
 
@@ -173,12 +177,6 @@ public class MapManager : Singleton<MapManager>
         {
             BuildMode = !BuildMode;
         }
-
-        //if(BuildMode)
-        //{
-        //    if(CurBuilding!=null)
-        //        BuildingBuild(CurBuilding);
-        //}
 
     }
 

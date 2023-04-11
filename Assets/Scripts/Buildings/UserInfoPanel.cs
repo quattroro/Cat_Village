@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Useable : BaseBuilding
+public class UserInfoPanel : MonoBehaviour
 {
     
 }

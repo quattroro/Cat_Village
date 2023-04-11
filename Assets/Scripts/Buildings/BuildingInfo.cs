@@ -8,4 +8,5 @@ public class BuildingInfo
     public int BuildingObjNum;
     public int BuildingType;
     public Vector2Int BuildingSize;
+    public int Price;
 }
