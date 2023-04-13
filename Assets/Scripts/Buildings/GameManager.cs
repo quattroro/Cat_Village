@@ -19,6 +19,31 @@ public class GameManager : Singleton<GameManager>
     public List<BuildingInfo> BuildingInfos = new List<BuildingInfo>();
 
 
+
+    #region Input 후에 필요 시 인풋으로 따로 빼준다.
+
+    private BaseBuilding curSelectedBuilding;
+
+    public BaseBuilding CurSelectedBuilding
+    {
+        get
+        {
+            return curSelectedBuilding;
+        }
+        set
+        {
+            curSelectedBuilding = value;
+
+        }
+    }
+
+
+
+    #endregion
+
+
+
+
     public void Awake()
     {
         

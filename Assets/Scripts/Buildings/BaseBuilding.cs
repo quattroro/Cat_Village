@@ -66,8 +66,8 @@ public class BaseBuilding : MonoBehaviour
 
     }
 
-    public GameObject temp1l;
-    public GameObject temp2;
+    //public GameObject temp1l;
+    //public GameObject temp2;
 
     public void Snap()
     {
@@ -84,11 +84,11 @@ public class BaseBuilding : MonoBehaviour
         {
             //현재 마우스의 위치를 기준으로 잡은 가상의 스냅피봇의 위치 = 현재 마우스의 위치 + 스냅피봇의 로컬위치
             Vector3 tempSnapPoint = worldMousePos + (SnapPoint.position - this.transform.position);
-            temp1l.transform.position = tempSnapPoint;
+            //temp1l.transform.position = tempSnapPoint;
 
             //해당 위치를 기준으로 왼쪽에 있는 월드 스냅피봇의 위치를 구한다.
             Vector3 worldSnapPoint = new Vector3((int)tempSnapPoint.x / (int)MapManager.Instance.GridSize, tempSnapPoint.y, (int)tempSnapPoint.z / (int)MapManager.Instance.GridSize);
-            temp2.transform.position = worldSnapPoint;
+            //temp2.transform.position = worldSnapPoint;
 
             //Grid의 시작점정보를 받아와서 스냅을 구현해준다.
             Vector3 tempvec = worldSnapPoint - tempSnapPoint;

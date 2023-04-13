@@ -62,6 +62,22 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
         set
         {
             isEnter = value;
+        }
+    }
+
+
+
+    private bool isStrok;
+
+    public virtual bool IsStrock
+    {
+        get
+        {
+            return isStrok;
+        }
+        set
+        {
+            isStrok = value;
 
             if (value)
             {
@@ -73,8 +89,6 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
             }
         }
     }
-
-
 
 
     public virtual void OnPointerEnter(PointerEventData eventData)

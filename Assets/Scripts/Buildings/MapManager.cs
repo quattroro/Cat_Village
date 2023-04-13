@@ -51,7 +51,7 @@ public class MapManager : Singleton<MapManager>
 
     [Header("BuildBuilding")]
     public BaseBuilding CurBuilding;
-    
+
 
 
     //[SerializeField]
@@ -70,14 +70,16 @@ public class MapManager : Singleton<MapManager>
             if(value)
             {
                 ActiveBuildMode();
-                if (CurBuilding != null)
-                    CurBuilding.IsBluePrintMode = true;
+
+                //if (CurBuilding != null)
+                //    CurBuilding.IsBluePrintMode = true;
             }
             else
             {
                 InActiveBuildMode();
-                if (CurBuilding != null)
-                    CurBuilding.IsBluePrintMode = false;
+
+                //if (CurBuilding != null)
+                //    CurBuilding.IsBluePrintMode = false;
             }
         }
     }
@@ -162,11 +164,30 @@ public class MapManager : Singleton<MapManager>
 
     public void BuildingBuild(BaseBuilding building)
     {
-        
+        if (!BuildMode)
+            BuildMode = true;
+
+        building.IsBluePrintMode = true;
+        CurBuilding = building;
 
     }
 
+    public void BuildCancel()
+    {
+        if(CurBuilding!=null)
+        {
+            CurBuilding.IsBluePrintMode = false;
+            ResourcesManager.instance.DestroyObj<GameObject>(CurBuilding.buildingInfo.PrefabName, CurBuilding.gameObject);
+            BuildMode = false;
+            CurBuilding = null;
+        }
+        
+    }
 
+    public void SetBuilding(BaseBuilding building, Vector2Int setIndex)
+    {
+
+    }
 
 
 
