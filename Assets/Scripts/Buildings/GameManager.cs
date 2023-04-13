@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
 
     public UserInfo userInfo;
 
+    public List<BuildingInfo> BuildingInfos = new List<BuildingInfo>();
+
 
     public void Awake()
     {

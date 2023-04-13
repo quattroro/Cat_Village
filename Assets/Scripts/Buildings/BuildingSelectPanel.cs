@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 ///////////////////////////////////////////////////////////
@@ -11,42 +12,16 @@ using UnityEngine;
 
 public class BuildingSelectPanel : UIPointerAdapter
 {
-    public BuildingInfo BuildingInfo;
+    public List<BuildingSelectNode> Nodes;
 
-    public override bool IsActive
-    {
-        get
-        {
-            return base.IsActive;
-        }
-        set
-        {
-            base.IsActive = value;
-        }
-
-    }
-
-    public override bool IsEnter
-    {
-        get
-        {
-            return base.IsActive;
-        }
-
-        set
-        {
-            base.IsActive = value;
-        }
-    }
-
-    public override void PointerClick()
+    public void AddBuildingSelectNode(BuildingInfo buildingInfo)
     {
 
     }
 
 
-    public override void PointerOverlay()
-    {
 
-    }
+
+
+
 }

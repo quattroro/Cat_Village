@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 
 
 ///////////////////////////////////////////////////////////
 /// JAVA의 Adapter클래스 처럼 모든 IUIPointer인터페이스를 상속받는
 /// 클래스들이 공통적으로 사용되는 기능들을 따로 구현 해주지 않도록 해준다.
 ///////////////////////////////////////////////////////////
-public class UIPointerAdapter : MonoBehaviour, IUIPointer
+public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Image BackGround;
 
@@ -63,7 +63,7 @@ public class UIPointerAdapter : MonoBehaviour, IUIPointer
         {
             isEnter = value;
 
-            if(value)
+            if (value)
             {
                 BackGround.gameObject.SetActive(true);
             }
@@ -76,25 +76,32 @@ public class UIPointerAdapter : MonoBehaviour, IUIPointer
 
 
 
-    public virtual void PointerClick()
-    {
 
-    }
-
-    public virtual void PointerEnter()
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         IsEnter = true;
     }
 
-    public virtual void PointerOuter()
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         IsEnter = false;
     }
 
-    public virtual void PointerOverlay()
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
 
     }
 
+    public virtual void OnPointerStay()
+    {
+
+    }
+
+    private void Update()
+    {
+        if (IsActive && IsEnter)
+            OnPointerStay();
+
+    }
 
 }
