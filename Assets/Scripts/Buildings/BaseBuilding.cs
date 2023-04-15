@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseBuilding : MonoBehaviour
 {
-    public enum BUILDINGTYPE { NORMAL, ROAD,SPECIAL, BUILDINGTYPEMAX}
+    
 
 
     /// ºôµù Á¤º¸
