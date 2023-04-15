@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
-public class BuildingSelectNode : UIPointerAdapter
+
+public class CustomButton : UIPointerAdapter
 {
-    public BuildingInfo BuildingInfo;
+    public UnityEvent ActionListener;
 
     public override bool IsActive
     {
@@ -30,6 +33,7 @@ public class BuildingSelectNode : UIPointerAdapter
         set
         {
             base.IsEnter = value;
+            IsStroke = value;
         }
     }
 
@@ -46,28 +50,17 @@ public class BuildingSelectNode : UIPointerAdapter
         }
     }
 
-    public void InitSetting(BuildingInfo buildingInfo)
+    public void AddListener(UnityAction action)
     {
-
+        ActionListener.AddListener(action);
     }
 
 
     //클릭되면 해당 빌딩 객체를 생성해서 월드에 배치할 수 있도록 해준다.
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if(IsStroke)
-        {
-            IsStroke = false;
-            MapManager.Instance.BuildCancel();
-        }
-        else
-        {
-            IsStroke = true;
-            GameObject building = ResourcesManager.Instance.InstantiateObj<GameObject>(BuildingInfo.PrefabName, false);
-            MapManager.Instance.BuildingBuild(building.GetComponent<BaseBuilding>());
-        }
+        ActionListener.Invoke();
 
-        
     }
 
 
@@ -75,6 +68,6 @@ public class BuildingSelectNode : UIPointerAdapter
 
     public override void OnPointerStay()
     {
-
+        
     }
 }

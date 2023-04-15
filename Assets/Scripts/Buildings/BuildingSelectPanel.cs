@@ -52,6 +52,12 @@ public class BuildingSelectPanel : UIPointerAdapter
         InitSetting();
     }
 
+    //private void OnEnable()
+    //{
+    //    if (MyRectTransform == null)
+    //        InitSetting();
+    //}
+
     public void InitSetting()
     {
         MyRectTransform = GetComponent<RectTransform>();
@@ -74,9 +80,9 @@ public class BuildingSelectPanel : UIPointerAdapter
 
 
     //처음 초기화 단계에 빌딩 메뉴를 생성하는데 사용한다.
-    public void AddBuildingSelectNode(BuildingInfo buildingInfo)
+    private void AddBuildingSelectNode(BuildingInfo buildingInfo)
     {
-        Debug.Log($"list count : {Nodes.Count}, now num : {(int)buildingInfo.BuildingType}");
+        //Debug.Log($"list count : {Nodes.Count}, now num : {(int)buildingInfo.BuildingType}");
 
         //if (Nodes[(int)buildingInfo.BuildingType] == null)
         //    Nodes[(int)buildingInfo.BuildingType] = new List<BuildingSelectNode>();
@@ -94,7 +100,7 @@ public class BuildingSelectPanel : UIPointerAdapter
         obj.SetActive(false);
     }
 
-    public void SetPanelSize(int buildingType)
+    private void SetPanelSize(int buildingType)
     {
         int nodenum = Nodes[buildingType].Count;
         NodeSize = Nodes[buildingType][0].GetComponent<RectTransform>().sizeDelta;
@@ -105,7 +111,9 @@ public class BuildingSelectPanel : UIPointerAdapter
 
 
 
-    public void ShowSelectNodes(int buildingType)
+
+
+    private void ShowSelectNodes(int buildingType)
     {
         for(int i=0;i<Nodes[LastSeletedType].Count;i++)
         {
@@ -115,7 +123,6 @@ public class BuildingSelectPanel : UIPointerAdapter
         {
             Nodes[buildingType][i].gameObject.SetActive(true);
         }
-        //SetPanelSize(buildingType);
     }
 
 

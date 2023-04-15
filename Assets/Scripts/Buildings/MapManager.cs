@@ -160,7 +160,28 @@ public class MapManager : Singleton<MapManager>
         lineRenderer.gameObject.SetActive(false);
     }
 
+    public GameObject BuildingSelectPanel;
+    private bool isshowBuildingSelectMenu;
 
+    public bool IsShowBuildingSelectMenu
+    {
+        get
+        {
+            return isshowBuildingSelectMenu;
+        }
+        set
+        {
+            isshowBuildingSelectMenu = value;
+            BuildingSelectPanel.SetActive(value);
+        }
+    }
+
+    public void ShowBuildingSelectMenu()
+    {
+        IsShowBuildingSelectMenu = !IsShowBuildingSelectMenu;
+    }
+
+    
 
     public void BuildingBuild(BaseBuilding building)
     {

@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 /// JAVA의 Adapter클래스 처럼 모든 IUIPointer인터페이스를 상속받는
 /// 클래스들이 공통적으로 사용되는 기능들을 따로 구현 해주지 않도록 해준다.
 ///////////////////////////////////////////////////////////
-public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,IPointerDownHandler,IPointerUpHandler
 {
     public Image BackGround;
 
@@ -67,17 +67,17 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 
 
-    private bool isStrok;
+    private bool isStroke;
 
-    public virtual bool IsStrock
+    public virtual bool IsStroke
     {
         get
         {
-            return isStrok;
+            return isStroke;
         }
         set
         {
-            isStrok = value;
+            isStroke = value;
 
             if (value)
             {
@@ -106,6 +106,20 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     }
 
+    
+
+    public virtual void OnPointerUp(PointerEventData eventData)
+    {
+
+    }
+
+    public virtual void OnPointerDown(PointerEventData eventData)
+    {
+        
+    }
+
+
+
     public virtual void OnPointerStay()
     {
 
@@ -117,5 +131,4 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
             OnPointerStay();
 
     }
-
 }
