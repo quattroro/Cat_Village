@@ -15,7 +15,51 @@ public class BaseBuilding : MonoBehaviour
     private Transform SnapPoint;
     private BoxCollider boxCollider;
 
-    
+
+    public delegate void CustomEvent();
+    private CustomEvent BuildingSetEvent;
+
+    public void AddBuildingSetEvent(CustomEvent excute)
+    {
+        BuildingSetEvent += excute;
+    }
+
+    public void DeleteBuildingSetEvent(CustomEvent excute)
+    {
+        BuildingSetEvent -= excute;
+    }
+
+
+    public Vector3 GetSnapPoint
+    {
+        get
+        {
+            return SnapPoint.position;
+        }
+    }
+
+    public Vector3Int GetSnapPointIndex
+    {
+        get
+        {
+            return new Vector3Int((int)SnapPoint.position.x / (int)MapManager.Instance.GridSize, 0, (int)SnapPoint.position.z / (int)MapManager.Instance.GridSize);
+        }
+    }
+
+    private bool isSnaped;
+
+    public bool IsSnaped
+    {
+        get
+        {
+            return isSnaped;
+        }
+        set
+        {
+            isSnaped = value;
+        }
+    }
+
 
     //[SerializeField]
     private bool isBluePrintMode;
@@ -29,8 +73,11 @@ public class BaseBuilding : MonoBehaviour
         set
         {
             isBluePrintMode = value;
+            if (!isBluePrintMode)
+                BuildingSetEvent();
         }
     }
+
 
     private void Start()
     {
@@ -66,8 +113,6 @@ public class BaseBuilding : MonoBehaviour
 
     }
 
-    //public GameObject temp1l;
-    //public GameObject temp2;
 
     public void Snap()
     {
@@ -95,11 +140,21 @@ public class BaseBuilding : MonoBehaviour
 
             if (tempvec.sqrMagnitude < 0.5)
             {
+                if(IsSnaped==false)
+                {
+                    
+                }
                 this.gameObject.transform.position = worldSnapPoint - (SnapPoint.position - this.transform.position);
+                IsSnaped = true;
             }
             else
             {
+                if(IsSnaped==true)
+                {
+                    
+                }
                 this.gameObject.transform.position = worldMousePos;
+                IsSnaped = false;
             }
         }
 

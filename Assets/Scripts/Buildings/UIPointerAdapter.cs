@@ -90,6 +90,11 @@ public class UIPointerAdapter : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
     }
 
+    public virtual void UIReset()
+    {
+        IsEnter = false;
+        IsStroke = false;
+    }
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {

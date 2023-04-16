@@ -64,6 +64,8 @@ public class BuildingSelectNode : UIPointerAdapter
         {
             IsStroke = true;
             GameObject building = ResourcesManager.Instance.InstantiateObj<GameObject>(BuildingInfo.PrefabName, false);
+            building.GetComponent<BaseBuilding>().buildingInfo = this.BuildingInfo;
+            building.GetComponent<BaseBuilding>().AddBuildingSetEvent(UIReset);
             MapManager.Instance.BuildingBuild(building.GetComponent<BaseBuilding>());
         }
 
@@ -71,7 +73,7 @@ public class BuildingSelectNode : UIPointerAdapter
     }
 
 
-
+    
 
     public override void OnPointerStay()
     {

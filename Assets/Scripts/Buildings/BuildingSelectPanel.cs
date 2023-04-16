@@ -69,7 +69,7 @@ public class BuildingSelectPanel : UIPointerAdapter
             Nodes.Add(new List<BuildingSelectNode>());
         }
 
-        for (int i=0;i< GameManager.Instance.BuildingInfos.Count;i++)
+        for (int i = 0; i < GameManager.Instance.BuildingInfos.Count; i++)
         {
             AddBuildingSelectNode(GameManager.Instance.BuildingInfos[i]);
         }
@@ -115,16 +115,22 @@ public class BuildingSelectPanel : UIPointerAdapter
 
     private void ShowSelectNodes(int buildingType)
     {
-        for(int i=0;i<Nodes[LastSeletedType].Count;i++)
+        for (int i = 0; i < Nodes[LastSeletedType].Count; i++)
         {
             Nodes[LastSeletedType][i].gameObject.SetActive(false);
         }
-        for(int i=0;i<Nodes[buildingType].Count;i++)
+        for (int i = 0; i < Nodes[buildingType].Count; i++)
         {
             Nodes[buildingType][i].gameObject.SetActive(true);
         }
     }
 
-
-
+    private void ResetSelectNodes()
+    {
+        for (int i = 0; i < Nodes[LastSeletedType].Count; i++)
+        {
+            Nodes[curSeletedType][i].IsStroke = false;
+        }
+    }
 }
+
